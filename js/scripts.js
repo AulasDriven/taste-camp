@@ -1,8 +1,15 @@
-const receitas = [{
-  titulo: "Ovo frito",
-  ingredientes: "Ovo, óleo e sal",
-  preparo: "Oléo da frigideira e fogo baixo no fogão. Quebra o ovo na manhazinha e taca na frigideira. Joga um salzinho pra dar um gostinho top e espera um pouquinho até fritar."
-}];
+let receitas = []; // quero do servidor
+
+// requisição
+const promise = axios.get("https://mock-api.bootcamp.respondeai.com.br/api/v2/tastecamp/receitas");
+promise.then(promessaCumprida);
+
+function promessaCumprida(resposta) {
+  console.log(resposta);// receitas do servidor
+  receitas = resposta.data;
+  renderizarReceitasMenu();
+  renderizarDetalhesReceita(0);
+}
 
 const paginaAdicionar = document.querySelector('.pagina.adicionar-receita');
 const paginaVerReceita = document.querySelector('.pagina.receita');
@@ -55,6 +62,3 @@ function mostrarReceitaPagina() {
   paginaAdicionar.classList.add('escondido');
   paginaVerReceita.classList.remove('escondido');
 }
-
-renderizarReceitasMenu();
-renderizarDetalhesReceita(0);
